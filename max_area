@@ -1,0 +1,26 @@
+def maximum_area(arr):
+    stack = []
+    i = 0
+    max_area = 0
+    area = 0
+    while i<len(arr):
+        if not stack:
+            stack.append(i)
+            i += 1
+        elif arr[i] > arr[stack[-1]]:
+            stack.append(i)
+            i += 1
+        else:
+            top = stack.pop()
+            if not stack:
+                height = arr[top]
+                width = i
+                area = height*width
+                max_area = max(area,max_area)
+            if stack:
+                height = arr[top]
+                width = i - stack[-1] - 1
+                area = height * width
+                max_area = max(area, max_area)
+    print("maximum area is", max_area)
+maximum_area([1,2,3,4,5,4,3,2,1])
